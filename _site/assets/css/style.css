@@ -842,14 +842,14 @@ header .social li i:hover {
 }
 
 .texture-black {
-  background-image: url("/texture/assets/textures/black.jpg");
+  background-image: url("/assets/textures/black.jpg");
 }
 .texture-black h2 {
   color: #999;
 }
 
 .texture-blue {
-  background-image: url("/texture/assets/textures/blue.jpg");
+  background-image: url("/assets/textures/blue.jpg");
 }
 .texture-blue h2 {
   color: #ddd;
@@ -862,15 +862,15 @@ header .social li i:hover {
 }
 
 .texture-red {
-  background-image: url("/texture/assets/textures/red.jpg");
+  background-image: url("/assets/textures/red.jpg");
 }
 
 .texture-purple {
-  background-image: url("/texture/assets/textures/purple.jpg");
+  background-image: url("/assets/textures/purple.jpg");
 }
 
 .texture-green {
-  background-image: url("/texture/assets/textures/green.jpg");
+  background-image: url("/assets/textures/green.jpg");
 }
 .texture-green .post-date {
   color: #ccc;

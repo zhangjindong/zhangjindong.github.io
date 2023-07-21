@@ -4,8 +4,8 @@ email: 1151517644@qq.com
 description: > # this means to ignore newlines until "show_exerpts:"
   我是一名前端公仔，关注Angular React Vue技术发展，及web3D webVR 方向的应用。
 show_excerpts: true # set to true to show excerpts on the homepage
-baseurl: /texture
-
+# baseurl: /texture
+url: https://github.com/zhangjindong/zhangjindong.github.io/
 # Minima date format
 # refer to http://shopify.github.io/liquid/filters/date/ if you want to customize this
 sass:
