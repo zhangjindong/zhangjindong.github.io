@@ -1,0 +1,42 @@
+title: 青木瓜
+author: 张锦栋
+email: 1151517644@qq.com
+description: > # this means to ignore newlines until "show_exerpts:"
+  我是一名前端公仔，关注Angular React Vue技术发展，及web3D webVR 方向的应用。
+show_excerpts: true # set to true to show excerpts on the homepage
+baseurl: 
+
+# Minima date format
+# refer to http://shopify.github.io/liquid/filters/date/ if you want to customize this
+sass:
+  sass_dir: _sass
+
+permalink: /posts/:title/
+texture:
+  title: 青色木瓜
+  tagline: Front-end.Developer
+  date_format: "%b %-d, %Y"
+  style: blue
+  showNav: true
+  showPicker: false
+
+  # generate social links in footer
+  social_links:
+    twitter: Z3xLsOdxPiyVlM7
+    github:  zhangjindong
+    linkedIn: in/zhangjindong
+    rss: rss
+ 
+
+# If you want to link only specific pages in your header, uncomment
+# this and add the path to the pages in order as they should show up
+#header_pages:
+# - about.md
+
+# Build settings
+theme: texture
+
+plugins:
+  - jekyll-seo-tag
+#  - jekyll-feed
+remote_theme: samarsault/texture
