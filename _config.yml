@@ -1,11 +1,11 @@
-title: Hexo
+title: 木瓜codding
 subtitle: 青木瓜
 description: ""
 keywords: null
 author: 木瓜
 language: zh-CN
 timezone: Asia/Shanghai
-url: http://example.com
+url: https://zhangjindong.github.io/
 permalink: ":year/:month/:day/:title/"
 permalink_defaults: null
 pretty_urls:
@@ -67,7 +67,3 @@ deploy:
   repo: https://github.com/zhangjindong/zhangjindong.github.io
   # example, https://github.com/hexojs/hexojs.github.io
   branch: gh-pages
-menu:
-  Home: /
-  Archives: /archives
-  Github: https://github.com/zhangjindong/zhangjindong.github.io

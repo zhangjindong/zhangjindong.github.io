@@ -1,21 +1,21 @@
 ---
 title: RxJS Observables 单元测试 – 实用指南
 date: 2024-04-15 13:34:19
-tags: Rxjs Vitest
+tags: [Rxjs, Vitest]
 ---
 
 由于 RxJS 观察链的异步特性，对其进行单元测试可能具有挑战性。我们最新的技术博客着眼于简化这个过程。
 
 目录表
 
-* RxJS 可观察对象单元测试中的挑战
-* 技术的先决条件
-* 单元测试目标
-* RxJS 观察链单元测试: 解决方案概述
-* 单元测试 RxJS 观察链: 解决方案示例
-* RxJS 观察链单元测试: 解决方案概述
-* 进一步的资源
-* 附录 A: 考虑单元测试 RxJS 观察链的替代解决方案
+- RxJS 可观察对象单元测试中的挑战
+- 技术的先决条件
+- 单元测试目标
+- RxJS 观察链单元测试: 解决方案概述
+- 单元测试 RxJS 观察链: 解决方案示例
+- RxJS 观察链单元测试: 解决方案概述
+- 进一步的资源
+- 附录 A: 考虑单元测试 RxJS 观察链的替代解决方案
 
 ## RxJS 可观察对象单元测试中的挑战
 
@@ -40,26 +40,18 @@ Adaptive 团队希望能够测试由观察链创建的可观察对象发出的�
 Stage 1: state.ts
 
 ```javascript
-import {
-    Observable,
-    map,
-    mergeWith,
-    scan,
-    startWith
-} from "rxjs";
-import {
-    pricesDto$,
-    resetPrices$
-} from "./service";
-export const prices$: Observable < Record < string, number >> = pricesDto$.pipe(
-    scan(
-        (accum, current) => ({
-            ...accum,
-            [current.symbol]: current.price,
-        }), {}
-    ),
-    mergeWith(resetPrices$.pipe(map(() => ({})))),
-    startWith({})
+import { Observable, map, mergeWith, scan, startWith } from "rxjs";
+import { pricesDto$, resetPrices$ } from "./service";
+export const prices$: Observable<Record<string, number>> = pricesDto$.pipe(
+  scan(
+    (accum, current) => ({
+      ...accum,
+      [current.symbol]: current.price,
+    }),
+    {}
+  ),
+  mergeWith(resetPrices$.pipe(map(() => ({})))),
+  startWith({})
 );
 ```
 
@@ -141,34 +133,26 @@ export function spyOnObservable(observable$: Observable < unknown > ) {
 
 **被测试的可观察对象依赖于两个源可观察对象:**
 
-* 第一个将发出一个对象，其中包含一个符号和价格的单个工具，每次有一个价格更新的工具。(在现实世界的应用中，这个可观察对象将是 WebSocket 流上的抽象。)
-* 第二个表示一个事件，当触发时，应该将价格查找表的状态重置为其初始空状态。
+- 第一个将发出一个对象，其中包含一个符号和价格的单个工具，每次有一个价格更新的工具。(在现实世界的应用中，这个可观察对象将是 WebSocket 流上的抽象。)
+- 第二个表示一个事件，当触发时，应该将价格查找表的状态重置为其初始空状态。
 
 这个可观察对象的初始实现如下所示。然而，在没有测试的情况下，我们不能确定它的行为是否符合预期。
 
 Stage 1: state.ts
 
 ```javascript
-import {
-    Observable,
-    map,
-    mergeWith,
-    scan,
-    startWith
-} from "rxjs";
-import {
-    pricesDto$,
-    resetPrices$
-} from "./service";
-export const prices$: Observable < Record < string, number >> = pricesDto$.pipe(
-    scan(
-        (accum, current) => ({
-            ...accum,
-            [current.symbol]: current.price,
-        }), {}
-    ),
-    mergeWith(resetPrices$.pipe(map(() => ({})))),
-    startWith({})
+import { Observable, map, mergeWith, scan, startWith } from "rxjs";
+import { pricesDto$, resetPrices$ } from "./service";
+export const prices$: Observable<Record<string, number>> = pricesDto$.pipe(
+  scan(
+    (accum, current) => ({
+      ...accum,
+      [current.symbol]: current.price,
+    }),
+    {}
+  ),
+  mergeWith(resetPrices$.pipe(map(() => ({})))),
+  startWith({})
 );
 ```
 
@@ -573,31 +557,22 @@ RxJS 可观察对象: 第 5 阶段——测试失败
 Stage 6: state.ts
 
 ```javascript
-import {
-    Observable,
-    mergeWith,
-    scan,
-    startWith
-} from "rxjs";
-import {
-    pricesDto$,
-    resetPrices$
-} from "./service";
-import {
-    Price
-} from "./model";
-export const prices$: Observable < Record < string, number >> = pricesDto$.pipe(
-    mergeWith(resetPrices$),
-    scan(
-        (accum, current: Price | void) =>
-        !current ?
-        {} :
-        {
+import { Observable, mergeWith, scan, startWith } from "rxjs";
+import { pricesDto$, resetPrices$ } from "./service";
+import { Price } from "./model";
+export const prices$: Observable<Record<string, number>> = pricesDto$.pipe(
+  mergeWith(resetPrices$),
+  scan(
+    (accum, current: Price | void) =>
+      !current
+        ? {}
+        : {
             ...accum,
             [current.symbol]: current.price,
-        }, {}
-    ),
-    startWith({})
+          },
+    {}
+  ),
+  startWith({})
 );
 ```
 

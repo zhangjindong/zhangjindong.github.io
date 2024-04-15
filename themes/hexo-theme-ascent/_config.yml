@@ -2,6 +2,7 @@
 menu:
   Home: /
   Archives: /archives
+  Github: https://github.com/zhangjindong/zhangjindong.github.io
 # rss: /atom.xml
 
 # Content
@@ -17,7 +18,7 @@ settings: true
 highlight: true
 
 # Word count (needs hexo-wordcount)
-word_count: false
+word_count: true
 
 # Google Analytics
 google_analytics:
@@ -26,5 +27,5 @@ google_analytics:
 
 # IntenseDebate ID
 intensedebate:
-  enable: false
-  acct: "00000000000000000000000000000000"
+  enable: true
+  acct: "6209ec1f60e469c615e515a9b4426504"

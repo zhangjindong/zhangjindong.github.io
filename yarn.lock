@@ -1153,6 +1153,7 @@ __metadata:
     hexo-renderer-stylus: "npm:^3.0.1"
     hexo-server: "npm:^3.0.0"
     hexo-theme-landscape: "npm:^1.0.0"
+    hexo-wordcount: "npm:^6.0.1"
   languageName: unknown
   linkType: soft
 
@@ -1191,6 +1192,13 @@ __metadata:
     prismjs: "npm:^1.29.0"
     strip-indent: "npm:^3.0.0"
   checksum: 10c0/43fc9eeb36ae0bb7ddb2d8dac9d9e67728eab5eb3258fd850d2b7467e1a842d0d7e11c649b9f97e383712b175bfc7c8c101e48ac7cd3aaa3bc6258f737acbaa0
+  languageName: node
+  linkType: hard
+
+"hexo-wordcount@npm:^6.0.1":
+  version: 6.0.1
+  resolution: "hexo-wordcount@npm:6.0.1"
+  checksum: 10c0/adcbaa9f3780fa3882f590dfcb462f70f01e25982eed9ebfd99c742511739014b97fd90797a498a99af1ab82a14cc726e311abe073a8fc8c750108433473adf4
   languageName: node
   linkType: hard
 
