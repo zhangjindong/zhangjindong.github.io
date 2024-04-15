@@ -63,8 +63,11 @@ exclude: null
 ignore: null
 theme: hexo-theme-ascent
 deploy:
-  type: ""
+  type: git
+  repo: https://github.com/zhangjindong/zhangjindong.github.io
+  # example, https://github.com/hexojs/hexojs.github.io
+  branch: gh-pages
 menu:
   Home: /
   Archives: /archives
-  Github: https://github.com/cjquines
+  Github: https://github.com/zhangjindong/zhangjindong.github.io

@@ -995,6 +995,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"hexo-deployer-git@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "hexo-deployer-git@npm:4.0.0"
+  dependencies:
+    bluebird: "npm:^3.7.2"
+    hexo-fs: "npm:^4.0.0"
+    hexo-util: "npm:^2.7.0"
+    luxon: "npm:^3.0.4"
+    nunjucks: "npm:^3.2.3"
+    picocolors: "npm:^1.0.0"
+  checksum: 10c0/9b3d3fa411a757316e61702affef2cb60839be76098443ec619f09908cfc3090c0ca0ffd33ebd04a1d60d41590bc9f2c7fb78c0cbc01ad4b75c6a44013d82632
+  languageName: node
+  linkType: hard
+
 "hexo-front-matter@npm:^4.2.1":
   version: 4.2.1
   resolution: "hexo-front-matter@npm:4.2.1"
@@ -1004,7 +1018,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hexo-fs@npm:^4.1.1":
+"hexo-fs@npm:^4.0.0, hexo-fs@npm:^4.1.1":
   version: 4.1.3
   resolution: "hexo-fs@npm:4.1.3"
   dependencies:
@@ -1129,6 +1143,7 @@ __metadata:
   resolution: "hexo-site@workspace:."
   dependencies:
     hexo: "npm:^7.1.1"
+    hexo-deployer-git: "npm:^4.0.0"
     hexo-generator-archive: "npm:^2.0.0"
     hexo-generator-category: "npm:^2.0.0"
     hexo-generator-index: "npm:^3.0.0"
@@ -1148,7 +1163,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hexo-util@npm:^2.5.0":
+"hexo-util@npm:^2.5.0, hexo-util@npm:^2.7.0":
   version: 2.7.0
   resolution: "hexo-util@npm:2.7.0"
   dependencies:
@@ -1589,6 +1604,13 @@ __metadata:
   dependencies:
     yallist: "npm:^4.0.0"
   checksum: 10c0/cb53e582785c48187d7a188d3379c181b5ca2a9c78d2bce3e7dee36f32761d1c42983da3fe12b55cb74e1779fa94cdc2e5367c028a9b35317184ede0c07a30a9
+  languageName: node
+  linkType: hard
+
+"luxon@npm:^3.0.4":
+  version: 3.4.4
+  resolution: "luxon@npm:3.4.4"
+  checksum: 10c0/02e26a0b039c11fd5b75e1d734c8f0332c95510f6a514a9a0991023e43fb233884da02d7f966823ffb230632a733fc86d4a4b1e63c3fbe00058b8ee0f8c728af
   languageName: node
   linkType: hard
 
