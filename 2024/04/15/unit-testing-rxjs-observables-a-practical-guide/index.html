@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>RxJS Observables 单元测试 – 实用指南 | Hexo</title>
+  <title>RxJS Observables 单元测试 – 实用指南 | 木瓜codding</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   
@@ -18,27 +18,28 @@
   <meta name="description" content="由于 RxJS 观察链的异步特性，对其进行单元测试可能具有挑战性。我们最新的技术博客着眼于简化这个过程。 目录表  RxJS 可观察对象单元测试中的挑战 技术的先决条件 单元测试目标 RxJS 观察链单元测试: 解决方案概述 单元测试 RxJS 观察链: 解决方案示例 RxJS 观察链单元测试: 解决方案概述 进一步的资源 附录 A: 考虑单元测试 RxJS 观察链的替代解决方案  RxJS 可观">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RxJS Observables 单元测试 – 实用指南">
-<meta property="og:url" content="http://example.com/2024/04/15/unit-testing-rxjs-observables-a-practical-guide/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:url" content="https://zhangjindong.github.io/2024/04/15/unit-testing-rxjs-observables-a-practical-guide/index.html">
+<meta property="og:site_name" content="木瓜codding">
 <meta property="og:description" content="由于 RxJS 观察链的异步特性，对其进行单元测试可能具有挑战性。我们最新的技术博客着眼于简化这个过程。 目录表  RxJS 可观察对象单元测试中的挑战 技术的先决条件 单元测试目标 RxJS 观察链单元测试: 解决方案概述 单元测试 RxJS 观察链: 解决方案示例 RxJS 观察链单元测试: 解决方案概述 进一步的资源 附录 A: 考虑单元测试 RxJS 观察链的替代解决方案  RxJS 可观">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2024/04/15/unit-testing-rxjs-observables-a-practical-guide/image.png">
-<meta property="og:image" content="http://example.com/2024/04/15/unit-testing-rxjs-observables-a-practical-guide/image-1.png">
-<meta property="og:image" content="http://example.com/2024/04/15/unit-testing-rxjs-observables-a-practical-guide/image-2.png">
-<meta property="og:image" content="http://example.com/2024/04/15/unit-testing-rxjs-observables-a-practical-guide/image-3.png">
-<meta property="og:image" content="http://example.com/2024/04/15/unit-testing-rxjs-observables-a-practical-guide/image-4.png">
+<meta property="og:image" content="https://zhangjindong.github.io/2024/04/15/unit-testing-rxjs-observables-a-practical-guide/image.png">
+<meta property="og:image" content="https://zhangjindong.github.io/2024/04/15/unit-testing-rxjs-observables-a-practical-guide/image-1.png">
+<meta property="og:image" content="https://zhangjindong.github.io/2024/04/15/unit-testing-rxjs-observables-a-practical-guide/image-2.png">
+<meta property="og:image" content="https://zhangjindong.github.io/2024/04/15/unit-testing-rxjs-observables-a-practical-guide/image-3.png">
+<meta property="og:image" content="https://zhangjindong.github.io/2024/04/15/unit-testing-rxjs-observables-a-practical-guide/image-4.png">
 <meta property="article:published_time" content="2024-04-15T05:34:19.000Z">
-<meta property="article:modified_time" content="2024-04-15T05:41:34.748Z">
+<meta property="article:modified_time" content="2024-04-15T07:30:00.078Z">
 <meta property="article:author" content="木瓜">
-<meta property="article:tag" content="Rxjs Vitest">
+<meta property="article:tag" content="Rxjs">
+<meta property="article:tag" content="Vitest">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2024/04/15/unit-testing-rxjs-observables-a-practical-guide/image.png"><meta name="generator" content="Hexo 7.1.1"></head>
+<meta name="twitter:image" content="https://zhangjindong.github.io/2024/04/15/unit-testing-rxjs-observables-a-practical-guide/image.png"><meta name="generator" content="Hexo 7.1.1"></head>
 
 <body>
   <div id="wrapper">
     <header id="header">
   <h1 id="title">
-    <a href="/">Hexo</a>
+    <a href="/">木瓜codding</a>
   </h1>
   <nav>
     
@@ -50,6 +51,11 @@
         <span class="nav-spacer">×</span>
       
       <a class="nav-link" href="/archives">Archives</a>
+    
+      
+        <span class="nav-spacer">×</span>
+      
+      <a class="nav-link" target="_blank" rel="noopener" href="https://github.com/zhangjindong/zhangjindong.github.io">Github</a>
     
     
   </nav>
@@ -71,6 +77,11 @@
         <div class="article-meta">
           <time class="article-date" datetime="2024-04-15T05:34:19.000Z" itemprop="datePublished">四月 15, 2024, 1:34 下午</time>
 
+          
+            × <span class="article-word-count">4.4k words</span>
+            
+            × <span class="article-time-to-read">20 minutes</span>
+            
           
         </div>
       </header>
@@ -98,7 +109,7 @@
 <h2 id="单元测试目标"><a href="#单元测试目标" class="headerlink" title="单元测试目标"></a>单元测试目标</h2><p>Adaptive 团队希望能够测试由观察链创建的可观察对象发出的各种状态排列，并通过它所依赖的上游源可观察对象向所述链提供各种输入。</p>
 <p>我们想要测试的单元是按原样导出的有状态可观察对象，或者是接受键(比如实体 ID)并返回可观察对象的函数。例如，下面的观察链，本文将演示如何进行单元测试。</p>
 <p>Stage 1: state.ts</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">    <span class="title class_">Observable</span>,</span><br><span class="line">    map,</span><br><span class="line">    mergeWith,</span><br><span class="line">    scan,</span><br><span class="line">    startWith</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">&quot;rxjs&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">    pricesDto$,</span><br><span class="line">    resetPrices$</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">&quot;./service&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="attr">prices$</span>: <span class="title class_">Observable</span> &lt; <span class="title class_">Record</span> &lt; string, number &gt;&gt; = pricesDto$.<span class="title function_">pipe</span>(</span><br><span class="line">    <span class="title function_">scan</span>(</span><br><span class="line">        <span class="function">(<span class="params">accum, current</span>) =&gt;</span> (&#123;</span><br><span class="line">            ...accum,</span><br><span class="line">            [current.<span class="property">symbol</span>]: current.<span class="property">price</span>,</span><br><span class="line">        &#125;), &#123;&#125;</span><br><span class="line">    ),</span><br><span class="line">    <span class="title function_">mergeWith</span>(resetPrices$.<span class="title function_">pipe</span>(<span class="title function_">map</span>(<span class="function">() =&gt;</span> (&#123;&#125;)))),</span><br><span class="line">    <span class="title function_">startWith</span>(&#123;&#125;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Observable</span>, map, mergeWith, scan, startWith &#125; <span class="keyword">from</span> <span class="string">&quot;rxjs&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; pricesDto$, resetPrices$ &#125; <span class="keyword">from</span> <span class="string">&quot;./service&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="attr">prices$</span>: <span class="title class_">Observable</span>&lt;<span class="title class_">Record</span>&lt;string, number&gt;&gt; = pricesDto$.<span class="title function_">pipe</span>(</span><br><span class="line">  <span class="title function_">scan</span>(</span><br><span class="line">    <span class="function">(<span class="params">accum, current</span>) =&gt;</span> (&#123;</span><br><span class="line">      ...accum,</span><br><span class="line">      [current.<span class="property">symbol</span>]: current.<span class="property">price</span>,</span><br><span class="line">    &#125;),</span><br><span class="line">    &#123;&#125;</span><br><span class="line">  ),</span><br><span class="line">  <span class="title function_">mergeWith</span>(resetPrices$.<span class="title function_">pipe</span>(<span class="title function_">map</span>(<span class="function">() =&gt;</span> (&#123;&#125;)))),</span><br><span class="line">  <span class="title function_">startWith</span>(&#123;&#125;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 
 <p>在开发我们在这里展示的模式之前，我们探索并拒绝了附录 A: 为 RxJS 观察链单元测试考虑的替代解决方案中描述的一些方法。</p>
 <h2 id="RxJS-观察链单元测试-解决方案概述"><a href="#RxJS-观察链单元测试-解决方案概述" class="headerlink" title="RxJS 观察链单元测试: 解决方案概述"></a>RxJS 观察链单元测试: 解决方案概述</h2><p>正如我们将在下面演示的那样，我们通过使用 spy 函数订阅被测对象来实现我们的测试目标，这样我们就可以断言所发出的内容，并用 RxJS 主题模拟源可观察对象。我们通过一个非常小的实用函数 spyOnObservable()来实现这一点，它抽象了与监视观察者相关的样板文件。我们在这里使用的是 Vitest，但如果您使用的是 Jest，则语义非常相似。如果您使用不同的测试库(如 Mocha、Jasmine 或 Qunit)，语义可能会有点不同，但概念和功能应该很容易转移。</p>
@@ -114,7 +125,7 @@
 </ul>
 <p>这个可观察对象的初始实现如下所示。然而，在没有测试的情况下，我们不能确定它的行为是否符合预期。</p>
 <p>Stage 1: state.ts</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">    <span class="title class_">Observable</span>,</span><br><span class="line">    map,</span><br><span class="line">    mergeWith,</span><br><span class="line">    scan,</span><br><span class="line">    startWith</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">&quot;rxjs&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">    pricesDto$,</span><br><span class="line">    resetPrices$</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">&quot;./service&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="attr">prices$</span>: <span class="title class_">Observable</span> &lt; <span class="title class_">Record</span> &lt; string, number &gt;&gt; = pricesDto$.<span class="title function_">pipe</span>(</span><br><span class="line">    <span class="title function_">scan</span>(</span><br><span class="line">        <span class="function">(<span class="params">accum, current</span>) =&gt;</span> (&#123;</span><br><span class="line">            ...accum,</span><br><span class="line">            [current.<span class="property">symbol</span>]: current.<span class="property">price</span>,</span><br><span class="line">        &#125;), &#123;&#125;</span><br><span class="line">    ),</span><br><span class="line">    <span class="title function_">mergeWith</span>(resetPrices$.<span class="title function_">pipe</span>(<span class="title function_">map</span>(<span class="function">() =&gt;</span> (&#123;&#125;)))),</span><br><span class="line">    <span class="title function_">startWith</span>(&#123;&#125;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Observable</span>, map, mergeWith, scan, startWith &#125; <span class="keyword">from</span> <span class="string">&quot;rxjs&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; pricesDto$, resetPrices$ &#125; <span class="keyword">from</span> <span class="string">&quot;./service&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="attr">prices$</span>: <span class="title class_">Observable</span>&lt;<span class="title class_">Record</span>&lt;string, number&gt;&gt; = pricesDto$.<span class="title function_">pipe</span>(</span><br><span class="line">  <span class="title function_">scan</span>(</span><br><span class="line">    <span class="function">(<span class="params">accum, current</span>) =&gt;</span> (&#123;</span><br><span class="line">      ...accum,</span><br><span class="line">      [current.<span class="property">symbol</span>]: current.<span class="property">price</span>,</span><br><span class="line">    &#125;),</span><br><span class="line">    &#123;&#125;</span><br><span class="line">  ),</span><br><span class="line">  <span class="title function_">mergeWith</span>(resetPrices$.<span class="title function_">pipe</span>(<span class="title function_">map</span>(<span class="function">() =&gt;</span> (&#123;&#125;)))),</span><br><span class="line">  <span class="title function_">startWith</span>(&#123;&#125;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 
 <p>有关其他上下文，请参见 service。t 和 model。Ts</p>
 <p>让我们设置测试文件。</p>
@@ -150,7 +161,7 @@
 <p>RxJS 可观察对象: 第 5 阶段——测试失败</p>
 <p>看来我们的测试发现了实现中的一个 bug ! 我们希望在 reset 可观察对象发出时将状态重置为空对象。但是我们传递给 scan()的 reducer 函数中的 accumulator 对象即使在重置之后也会保留状态。让我们通过在 scan()之前移动 mergeWith()来解决这个问题，并在 reducer 函数中添加一个条件，以便在重置事件中用空对象替换状态。(在这种情况下，流入 scan()的值将是 false 而不是 Price 对象。)</p>
 <p>Stage 6: state.ts</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">    <span class="title class_">Observable</span>,</span><br><span class="line">    mergeWith,</span><br><span class="line">    scan,</span><br><span class="line">    startWith</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">&quot;rxjs&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">    pricesDto$,</span><br><span class="line">    resetPrices$</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">&quot;./service&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">    <span class="title class_">Price</span></span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">&quot;./model&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="attr">prices$</span>: <span class="title class_">Observable</span> &lt; <span class="title class_">Record</span> &lt; string, number &gt;&gt; = pricesDto$.<span class="title function_">pipe</span>(</span><br><span class="line">    <span class="title function_">mergeWith</span>(resetPrices$),</span><br><span class="line">    <span class="title function_">scan</span>(</span><br><span class="line">        <span class="function">(<span class="params">accum, current: Price | <span class="keyword">void</span></span>) =&gt;</span></span><br><span class="line">        !current ?</span><br><span class="line">        &#123;&#125; :</span><br><span class="line">        &#123;</span><br><span class="line">            ...accum,</span><br><span class="line">            [current.<span class="property">symbol</span>]: current.<span class="property">price</span>,</span><br><span class="line">        &#125;, &#123;&#125;</span><br><span class="line">    ),</span><br><span class="line">    <span class="title function_">startWith</span>(&#123;&#125;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Observable</span>, mergeWith, scan, startWith &#125; <span class="keyword">from</span> <span class="string">&quot;rxjs&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; pricesDto$, resetPrices$ &#125; <span class="keyword">from</span> <span class="string">&quot;./service&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Price</span> &#125; <span class="keyword">from</span> <span class="string">&quot;./model&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="attr">prices$</span>: <span class="title class_">Observable</span>&lt;<span class="title class_">Record</span>&lt;string, number&gt;&gt; = pricesDto$.<span class="title function_">pipe</span>(</span><br><span class="line">  <span class="title function_">mergeWith</span>(resetPrices$),</span><br><span class="line">  <span class="title function_">scan</span>(</span><br><span class="line">    <span class="function">(<span class="params">accum, current: Price | <span class="keyword">void</span></span>) =&gt;</span></span><br><span class="line">      !current</span><br><span class="line">        ? &#123;&#125;</span><br><span class="line">        : &#123;</span><br><span class="line">            ...accum,</span><br><span class="line">            [current.<span class="property">symbol</span>]: current.<span class="property">price</span>,</span><br><span class="line">          &#125;,</span><br><span class="line">    &#123;&#125;</span><br><span class="line">  ),</span><br><span class="line">  <span class="title function_">startWith</span>(&#123;&#125;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 
 <p>我们的测试现在又通过了，这给了我们信心，我们的观察链做了我们想要它做的事情。</p>
 <p><img src="/2024/04/15/unit-testing-rxjs-observables-a-practical-guide/image-4.png" alt="alt text"></p>
@@ -173,7 +184,7 @@
       
       
         <b>Tags:</b>
-        <a class="article-tag-none-link" href="/tags/Rxjs-Vitest/" rel="tag">Rxjs Vitest</a>
+        <a class="article-tag-none-link" href="/tags/Rxjs/" rel="tag">Rxjs</a>, <a class="article-tag-none-link" href="/tags/Vitest/" rel="tag">Vitest</a>
       
     </div>
     
@@ -185,11 +196,21 @@
 
 
 
+  <script>
+  var idcomments_acct = '6209ec1f60e469c615e515a9b4426504';
+  var idcomments_post_id;
+  var idcomments_post_url;
+  </script>
+  <span id="IDCommentsPostTitle" style="display:none"></span>
+  <script type='text/javascript' src='https://www.intensedebate.com/js/genericCommentWrapperV2.js'></script>
+
 
 
     </div>
   </div>
-    
+   
+<link rel="stylesheet" href="/css/comments.css">
+   
 <div id="settings-container">
   <div id="to-top" onclick="window.scrollTo({left: 0, top: 0,behavior: 'smooth' })">Top</div>
   <div id="dark-mode">dark</div>
