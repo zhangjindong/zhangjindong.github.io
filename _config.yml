@@ -13,7 +13,7 @@ sass:
 
 permalink: /posts/:title/
 texture:
-  title: 青色木瓜
+  title: 木瓜Codding
   tagline: Front-end.Developer
   date_format: "%b %-d, %Y"
   style: blue
@@ -24,7 +24,7 @@ texture:
   social_links:
     twitter: Z3xLsOdxPiyVlM7
     github:  zhangjindong
-    linkedIn: in/zhangjindong
+    linkedIn: in/jindongzhang9527
     rss: rss
  
 
@@ -40,3 +40,7 @@ plugins:
   - jekyll-seo-tag
 #  - jekyll-feed
 remote_theme: samarsault/texture
+
+collections:
+  staff_members:
+    people: true
